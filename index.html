@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Surprise Party Room Dashboard</title>
+    <!-- Add Poppins font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- Add particles.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- Add this div for particles at the very beginning of the body -->
+    <div id="particles-js"></div>
+
+    <div class="parallax-container">
+        <div class="parallax-layer" data-depth="0.2">
+            <img src="path/to/background-image.jpg" alt="Background" class="parallax-bg">
+        </div>
+        <div class="parallax-layer" data-depth="0.5">
+            <div class="auth-buttons">
+                <button class="auth-button login" aria-label="Login">
+                    <i class="fas fa-key"></i> Login
+                </button>
+                <button class="auth-button signup" aria-label="Sign Up">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </div>
+        </div>
+        <div class="parallax-layer" data-depth="0.8">
+            <section class="introduction">
+                <h1 class="welcome-headline">Welcome to Your Virtual Surprise Party Room</h1>
+                <p class="welcome-description">Create unforgettable moments with friends and family, no matter the distance.</p>
+                
+                <div class="party-buttons">
+                    <button class="party-button create-party" aria-label="Create a Party">
+                        <i class="fas fa-plus-circle"></i> Create a Party
+                    </button>
+                    <button class="party-button join-party" aria-label="Join a Party">
+                        <i class="fas fa-sign-in-alt"></i> Join a Party
+                    </button>
+                    <button class="party-button start-game" aria-label="Start Game">
+                        <i class="fas fa-gamepad"></i> Start Game
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Add this at the end of the body, just before the closing </body> tag -->
+    <button id="chatButton" class="chat-button" aria-label="Open Chat">
+        <i class="fas fa-comments"></i>
+    </button>
+    
+    <div id="chatWindow" class="chat-window">
+        <div class="chat-header">
+            <h3>Chat</h3>
+            <button id="closeChatButton" class="close-chat-button" aria-label="Close Chat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="chatMessages" class="chat-messages"></div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button id="sendMessageButton" aria-label="Send Message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Add this new section just before the closing </body> tag -->
+    <div id="createPartyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create a Party</h2>
+            <form id="createPartyForm">
+                <div class="form-step" data-step="1">
+                    <h3>Step 1: Basic Information</h3>
+                    <div class="form-group">
+                        <label for="partyName">Party Name:</label>
+                        <input type="text" id="partyName" name="partyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="videoPlatform">Video Platform:</label>
+                        <select id="videoPlatform" name="videoPlatform" required>
+                            <option value="">Select a platform</option>
+                            <option value="zoom">Zoom</option>
+                            <option value="google-meet">Google Meet</option>
+                            <option value="skype">Skype</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="participantCount">Number of Participants:</label>
+                        <input type="number" id="participantCount" name="participantCount" min="2" max="100" required>
+                    </div>
+                    <button type="button" class="next-step">Next</button>
+                </div>
+
+                <div class="form-step" data-step="2">
+                    <h3>Step 2: Theme and Games</h3>
+                    <div class="form-group">
+                        <label for="partyTheme">Party Theme:</label>
+                        <select id="partyTheme" name="partyTheme" required>
+                            <option value="">Select a theme</option>
+                            <option value="birthday">Birthday</option>
+                            <option value="anniversary">Anniversary</option>
+                            <option value="christmas">Christmas</option>
+                            <option value="diwali">Diwali</option>
+                            <option value="summer">Summer</option>
+                            <option value="winter">Winter</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Games:</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="game1" name="games" value="scavenger-hunt">
+                            <label for="game1">Scavenger Hunt</label>
+                            <input type="checkbox" id="game2" name="games" value="trivia">
+                            <label for="game2">Trivia</label>
+                            <input type="checkbox" id="game3" name="games" value="pictionary">
+                            <label for="game3">Pictionary</label>
+                            <input type="checkbox" id="game4" name="games" value="charades">
+                            <label for="game4">Charades</label>
+                        </div>
+                    </div>
+                    <button type="button" class="prev-step">Previous</button>
+                    <button type="button" class="next-step">Next</button>
+                </div>
+
+                <div class="form-step" data-step="3">
+                    <h3>Step 3: Customization</h3>
+                    <div class="form-group">
+                        <label for="countdown">Countdown to Party:</label>
+                        <input type="datetime-local" id="countdown" name="countdown">
+                    </div>
+                    <div class="form-group">
+                        <label for="surpriseMessage">Surprise Message:</label>
+                        <textarea id="surpriseMessage" name="surpriseMessage" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="surpriseTime">Surprise Message Reveal Time:</label>
+                        <input type="time" id="surpriseTime" name="surpriseTime">
+                    </div>
+                    <div class="form-group">
+                        <label for="giftOption">Virtual Gift Option:</label>
+                        <select id="giftOption" name="giftOption">
+                            <option value="">Select a gift option</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="musicPlaylist">Music Playlist:</label>
+                        <input type="text" id="musicPlaylist" name="musicPlaylist" placeholder="Enter a Spotify playlist URL">
+                    </div>
+                    <button type="button" class="prev-step">Previous</button>
+                    <button type="button" class="next-step">Next</button>
+                </div>
+
+                <div class="form-step" data-step="4">
+                    <h3>Step 4: Surprise Capsule Messages</h3>
+                    <div id="capsuleMessages">
+                        <div class="capsule-message">
+                            <input type="text" name="capsuleRecipient[]" placeholder="Recipient's name">
+                            <textarea name="capsuleContent[]" placeholder="Capsule message"></textarea>
+                        </div>
+                    </div>
+                    <button type="button" id="addCapsuleMessage">Add Another Capsule Message</button>
+                    <button type="button" class="prev-step">Previous</button>
+                    <button type="submit" class="submit-button">Create Party</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add this new section for games just before the closing </body> tag -->
+    <div id="gamesModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Party Games</h2>
+            <div id="gameSelectionCarousel" class="game-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <!-- Game cards will be dynamically inserted here -->
+                    </div>
+                </div>
+                <button class="carousel-button prev">&lt;</button>
+                <button class="carousel-button next">&gt;</button>
+            </div>
+            <div id="gameArea" style="display: none;">
+                <h3 id="gameTitle"></h3>
+                <div id="gameContent"></div>
+                <div id="gameControls"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax.js/1.5.0/parallax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+    <script src="games.js"></script>
+
+    <!-- Add this just before the closing </body> tag -->
+    <div id="countdownOverlay" class="overlay">
+        <div class="countdown-container">
+            <h2>Party Starting In</h2>
+            <div id="countdown">15</div>
+        </div>
+    </div>
+
+    <div id="privateCapsuleOverlay" class="overlay">
+        <div class="capsule-container">
+            <h2>Private Capsule Message</h2>
+            <p id="capsuleMessage"></p>
+            <button id="closeCapsuleButton">Close</button>
+        </div>
+    </div>
+
+    <!-- Add this new section just before the closing </body> tag -->
+    <div id="photoBooth" class="photo-booth">
+        <div class="camera-preview">
+            <video id="cameraFeed" autoplay playsinline></video>
+            <div id="backgroundLayer" class="background-layer"></div>
+            <canvas id="effectsCanvas" class="effects-canvas"></canvas>
+        </div>
+        <div class="controls">
+            <button id="captureButton" class="capture-button">
+                <i class="fas fa-camera"></i>
+            </button>
+        </div>
+        <div id="backgroundCarousel" class="background-carousel">
+            <!-- Background options will be dynamically added here -->
+        </div>
+        <div class="customization-panel">
+            <button id="filtersButton" class="panel-button">Filters</button>
+            <button id="stickersButton" class="panel-button">Stickers</button>
+            <button id="overlaysButton" class="panel-button">Overlays</button>
+        </div>
+        <div id="photoPreview" class="photo-preview">
+            <img id="capturedPhoto" src="" alt="Captured Photo" style="display: none;">
+        </div>
+    </div>
+
+    <!-- Add this new section just before the closing </body> tag -->
+    <div id="surpriseCapsules" class="surprise-capsules">
+        <h2 class="capsules-header">Surprise Capsules for You 💌</h2>
+        <div id="capsuleList" class="capsule-list"></div>
+        <button id="addCapsuleButton" class="add-capsule-button">+</button>
+    </div>
+
+    <!-- Add this modal for creating new capsules -->
+    <div id="newCapsuleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create a New Surprise Capsule</h2>
+            <!-- Theme selection will be dynamically inserted here -->
+            <form id="newCapsuleForm">
+                <input type="text" id="capsuleTitle" placeholder="Capsule Title" required>
+                <textarea id="capsuleMessage" placeholder="Write your message here..." required></textarea>
+                <input type="file" id="capsuleImage" accept="image/*">
+                <input type="datetime-local" id="capsuleUnlockTime" required>
+                <select id="capsuleShape" name="capsuleShape">
+                    <option value="circle">Circle</option>
+                    <option value="square">Square</option>
+                    <option value="heart">Heart</option>
+                </select>
+                <button type="submit">Create Capsule</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
